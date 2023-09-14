@@ -1,19 +1,21 @@
 using System;
 using System.Collections;
 
-
-public class Fila<T> {
+public class Fila<T>
+{
     private ArrayList elementos = new ArrayList();
-
-    // para adicionar um elemento ao final da fila
-    public void Enqueue(T item) {
-        elementos.Add(item)
+    
+    // Adiciona o elemento à fila.
+    public void Enqueue(T item)
+    {
+        elementos.Add(item);
     }
 
-
-    // para reomver o elemento no inicio da fila
-    public T Dequeue() {
-        if(elementos.Count == 0) {
+    // Remove e retornar o priemiro elemento da fila.
+    public T Dequeue()
+    {
+        if (elementos.Count == 0)
+        {
             throw new InvalidOperationException("A fila está vazia.");
         }
 
@@ -22,25 +24,29 @@ public class Fila<T> {
         return item;
     }
 
-
-    public T Peek() {
-        if(elementos.Count == 0) {
+    // Retornar o primeiro elemento da fila sem removelo
+    public T Peek()
+    {
+        if (elementos.Count == 0)
+        {
             throw new InvalidOperationException("A fila está vazia.");
         }
 
         return (T)elementos[0];
     }
 
-
-    public int Count {
-        get {
-            return elemenotos.Count;
+    // Retorna o Tamanho da fila.
+    public int Count
+    {
+        get { 
+            return elementos.Count;
         }
     }
 
-
-    public bool IsEmpty {
-        get {
+    // Verifica se a fila es´ta vazia.
+    public bool IsEmpty
+    {
+        get { 
             return elementos.Count == 0;
         }
     }
