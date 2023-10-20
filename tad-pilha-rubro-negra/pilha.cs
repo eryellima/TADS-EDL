@@ -1,111 +1,119 @@
 using System;
 
-
+// A classe Pilha<T> é definida como genérica, onde T é um tipo genérico que será especificado ao criar uma instância da classe.
 class Pilha<T> {
-  private T[] array;
-  private int tamanho;
-  private int t_vermelha;
-  private int t_preta;
+    private T[] array;
+    private int tamanho;
+    private int t_Vermelha; // Índice para o topo da pilha vermelha
+    private int t_Preta; // Índice para o topo da pilha preta
 
-  
-  public Pilha(int capacidade) {
-    if(capacidade <= 0) {
-      throw new ArgumentException("A capacidade deve ser maior que zero!");
+
+    // Construtor que cria uma instância da classe Pilha. Inicializa o array    
+    public Pilha(int capacidade) {
+        if (capacidade <= 0) {
+            throw new ArgumentException("A capacidade deve ser maio que zero!");
+        }
+
+        array = new T[capacidade];
+        tamanho = capacidade;
+        t_Vermelha = -1;
+        t_Preta = tamanho;
     }
 
-    array = new T[capacidade];
-    tamanho = capacidade;
-    t_vermelha = -1;
-    t_preta = tamanho;
-  }
 
-  
-  public void Push_Vermelha(T item) {
-    if(t_vermelha + 1 == t_preta) {
-      Redimensionar();
+    // Método para inserir elementos na pilha, verifica se há espaço disponível e remensiona o array
+    public void Push_Vermelha(T item) {
+        if (t_Vermelha + 1 == t_Preta) {
+            Redimensionar();
+        }
+
+        t_Vermelha++;
+        array[t_Vermelha] = item;
     }
 
-    t_vermelha++;
-    array[t_vermelha] = item;
-  }
+    // Método para inserir elementos na pilha, verifica se há espaço disponível e remensiona o array
+    public void Push_Preta(T item) {
+        if (t_Preta -1 == t_Vermelha) {
+            Redimensionar();
+        }
 
-  
-  public void Push_Preta(T item) {
-    if(t_preta - 1 == t_vermelha) {
-      Redimensionar();
+        t_Preta--;
+        array[t_Preta] = item;
     }
 
-    t_preta--;
-    array[t_preta] = item;
-  }
 
+    // Método para remover elementos na pilha e lança uma exceção se a pilha estiver vazia.
+    public T Pop_Vermelha() {
+        if (t_Vermelha == -1) {
+            throw new InvalidOperationException("A pilha está vazia!");
+        }
 
-  public T Pop_Vermelha() {
-    if(t_vermelha == -1) {
-      throw new InvalidOperationException("A pilha está vazia!");
+        T item = array[t_Vermelha];
+        t_Vermelha--;
+        return item;
     }
 
-    T item = array[t_vermelha];
-    t_vermelha--;
-    return item;
-  }
+    // Método para remover elementos na pilha e lança uma exceção se a pilha estiver vazia.
+    public T Pop_Preta() {
+        if (t_Preta == tamanho) {
+            throw new InvalidOperationException("A pilha está vazia!");
+        }
 
-  
-  public T Pop_Preta() {
-    if(t_preta == tamanho) {
-      throw new InvalidOperationException("A pilha está vazia!");
+        T item = array[t_Preta];
+        t_Preta++;
+        return item;
     }
 
-    T item = array[t_preta];
-    t_preta++;
-    return item;
-  }
 
+    // Método para retornar o elemento no topo da pilha sem remover e lança uma exceção se a pilha esttiver vazia.
+    public T Top_Vermelha() {
+        if (t_Vermelha == -1) {
+            throw new InvalidOperationException("A pilha vermelha está vazia.");
+        }
 
-  public T Top_Vermelha() {
-    if(t_vermelha == -1) {
-      throw new InvalidOperationException("A pilha está vazia!");
+        return array[t_Vermelha];
     }
 
-    return array[t_vermelha];
-  }
+    // Método para retornar o elemento no topo da pilha sem remover e lança uma exceção se a pilha esttiver vazia.
+    public T Top_Preta() {
+        if (t_Preta == tamanho) {
+            throw new InvalidOperationException("A pilha preta está vazia.");
+        }
 
-
-  public T Top_Preta() {
-    if(t_preta == tamanho) {
-      throw new InvalidOperationException("A pilha está vazia!");
+        return array[t_Preta];
     }
 
-    return array[t_preta];
-  }
 
-
-  public int Size_Vermelha() {
-    return t_vermelha + 1;
-  }
-
-
-  public int Size_Preta() {
-    return tamanho - t_preta;
-  }
-
-  public void Redimensionar() {
-    int nova_capacidade = tamanho * 2;
-    T[] novo_array = new T[nova_capacidade];
-
-    for(int i = 0; i <= t_vermelha; i++) {
-      novo_array[i] = array[i];
+    // método que retornam o número de elementos nas respectivas pilhas.
+    public int Size_Vermelha() {
+        return t_Vermelha + 1;
     }
 
-    int novo_t_preta = nova_capacidade - 1;
-
-    for(int i = tamanho - 1; i >= t_preta; i--) {
-      novo_array[novo_t_preta] = array[i];
-      novo_t_preta--;
+    // método que retornam o número de elementos nas respectivas pilhas.
+    public int Size_Preta() {
+        return tamanho - t_Preta;
     }
 
-    tamanho = nova_capacidade;
-    t_preta = novo_t_preta;
-    array = novo_array;
-  }
+
+    // Método para aumentar a capacidade do array quando ambas as pilhas estão cheias.
+    private void Redimensionar() {
+        int nova_capacidade = tamanho *2;
+        T[] novo_array = new T[nova_capacidade];
+        
+        for(int i = 0; i <= t_Vermelha; i++) {
+            novo_array[i] = array[i];
+        }
+
+ 
+        int novo_t_Preta = nova_capacidade - 1;
+
+        for(int i = tamanho -1; i >= t_Preta; i--) {
+            novo_array[novo_t_Preta] = array[i];
+            novo_t_Preta--;
+        }
+
+        tamanho = nova_capacidade;
+        t_Preta = novo_t_Preta;
+        array = novo_array;
+    }
 }
