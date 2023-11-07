@@ -13,36 +13,43 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Acessa o nó raiz da arvore
     public No<T> Root() {
         return this.raiz;
     }
 
-
+    
+    // Tenta obter o pai de um nó
     public No<T> Parent(No<T> v) {
         return v.Parent;
     }
 
 
+    // Obtem a lista de filhos de um nó
     public List<No<T>> Children(No<T> v) {
         return v.Children;
     }
 
 
+    // Retornam true se o nó for interno
     public bool IsInternal(No<T> v) {
         return (v.Children.Count > 0);
     }
 
 
+    // Retorna true se o nó for um nó externo
     public bool IsExternal(No<T> v) {
         return (v.Children.Count == 0);
     }
 
 
+    // Verifica se o nó é a raiz
     public bool IsRoot(No<T> v) {
         return (v == this.raiz);
     }
 
 
+    // Adiciona um novo nó como filho
     public No<T> AddChild(No<T> v, T o) {
         No<T> novo = new No<T>(v, o);
         v.Children.Add(novo);
@@ -52,9 +59,11 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Remove um né da árvore
     public T Remove(No<T> v) {
         No<T> pai = v.Parent;
-        
+
+        // Verifican se o o nó é a raiz da árvore ou se ele não tem filhos
         if(pai != null || this.IsExternal(v)) {
             pai.Children.Remove(v);
         } else {
@@ -68,6 +77,7 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Troca os valores do nó existente
     public void SwapElements(No<T> v, No<T> w) {
         T temp = v.Element;
         v.Element = w.Element;
@@ -80,7 +90,8 @@ public class ArvoreSimples<T> {
         
         return profundidade;
     }
-
+    
+    // Retorna a profundidade
     private int Profundidade(No<T> v) {
         if(v == this.raiz) {
             return 0;
@@ -94,6 +105,7 @@ public class ArvoreSimples<T> {
         return Height(this.raiz);
     }
 
+    // Retorna a altura
     private int Height(No<T> node) {
         if (node == null) {
             return 0;
