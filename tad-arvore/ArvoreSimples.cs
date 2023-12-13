@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 
 public class ArvoreSimples<T> {
-    private No<T> raiz;
+    private No<T> raiz; 
     private int tamanho;
 
 
@@ -77,7 +77,7 @@ public class ArvoreSimples<T> {
     }
 
 
-    // Troca os valores do nó existente
+    // Troca os valores de dois nós
     public void SwapElements(No<T> v, No<T> w) {
         T temp = v.Element;
         v.Element = w.Element;
@@ -85,6 +85,7 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Retorna a profundidade
     public int Depth(No<T> v) {
         int profundidade = this.Profundidade(v);
         
@@ -101,6 +102,7 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Retorna a altura
     public int Height() {
         return Height(this.raiz);
     }
@@ -125,10 +127,12 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Retorna uma sequência de elementos da árvore
     public IEnumerable<T> Elements() {
         return Elements(this.raiz);
     }
 
+    // Retorna uma sequência de elementos da árvore
     private IEnumerable<T> Elements(No<T> node) {
         yield return node.Element;
 
@@ -140,10 +144,12 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Retorna uma sequência de nós da árvore
     public IEnumerable<No<T>> Nodes() {
         return Nodes(this.raiz);
     }
 
+    // Retorna uma sequência de nós da árvore
     private IEnumerable<No<T>> Nodes(No<T> node) {
         yield return node;
 
@@ -155,16 +161,18 @@ public class ArvoreSimples<T> {
     }
 
 
+    // Retorna o tamanho da árvore
     public int Size() {
         return this.tamanho;
     }
 
 
+    // Verifica se a árvore está vazia
     public bool IsEmpty() {
         return this.tamanho == 0;
     }
 
-
+    // Substitui o elemenbto ded um nó e retorna o elemento antigo
     public T Replace(No<T> v, T o) {
         T oldElement = v.Element;
         v.Element = o;
