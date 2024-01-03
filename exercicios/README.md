@@ -6,3 +6,5 @@
 ### Árvore Genérica
 1. **Contrução de Árvore Genérica:**
 - Implementa um método em uma classe de árvore genérica que insere um novo nó com valor `x` como filho do nó que contém o valor y. Se o valor y não existir na árvore, o método não deve fazer nada.
+
+  [implementação do método](outros/Arvore_insertChild.cs)
