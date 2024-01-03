@@ -39,13 +39,16 @@ public class DoublyLinkedList{
     }
 
     // Encontrar o nó do meio
+    /*
+        a ideia é usar dois ponteiros um para avançar de um nó por vez (fastSentinela) e outro que avança de dois em dois nós (slowSentinela). Quando o ponteiro rápido chegar ao final da lista o ponteiro lento vai estar no nó do meio.
+    */
     public Node FindMiddleNode(){
-        Node primeiraSentinela = first.Next;
-        Node ultimaSentinela = first.Next;
+        Node fastSentinela = first.Next;
+        Node slowSentinela = first.Next;
 
-        while(primeiraSentinela != last && primeiraSentinela.Next != last){
-            primeiraSentinela = primeiraSentinela.Next.Next;
-            ultimaSentinela = ultimaSentinela.Next;
+        while(fastSentinela != last && fastSentinela.Next != last){
+            fastSentinela = fastSentinela.Next.Next;
+            slowSentinela = slowSentinela.Next;
         }
 
         return ultimaSentinela;
