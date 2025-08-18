@@ -1,0 +1,4 @@
+# --- Pastas e arquivos geradas pelo build ---
+bin/
+obj/
+*.csproj
